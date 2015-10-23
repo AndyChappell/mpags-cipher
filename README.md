@@ -18,7 +18,7 @@ Ciphertext will be written to screen or file.
 
 # Authors
 
-...  
+Andy Chappell  
 
 # Documentation
 

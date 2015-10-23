@@ -19,3 +19,7 @@ Ciphertext will be written to screen or file.
 # Authors
 
 ...  
+
+# Documentation
+
+Documentation will be added here...

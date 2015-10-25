@@ -7,13 +7,15 @@
 void ex2();
 void ex3();
 std::string transformChar(char input);
+bool checkHelp(std::string flag);
 
 int main(int argc, char* argv[])
 {
    for(int i = 0; i < argc; ++i)
    {
       std::string name =argv[i];
-      std::cout << name << std::endl;
+      if(!checkHelp(name))
+         std::cout << name << std::endl;
    }
 
    //ex3();
@@ -111,4 +113,18 @@ std::string transformChar(char input)
          else
             return "";
    }
+}
+
+bool checkHelp(std::string flag)
+{
+   if(flag == "-h" || flag == "--help")
+   {
+      std::cout << "Usage: mpags-cipher [arguments]" << std::endl;
+      std::cout << "Please provide a list of arguments which will be printed"
+         << " out by the program." << std::endl;
+
+      return true;
+   }
+
+   return false;
 }

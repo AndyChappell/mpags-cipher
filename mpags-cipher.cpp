@@ -8,9 +8,15 @@ void ex2();
 void ex3();
 std::string transformChar(char input);
 
-int main()
+int main(int argc, char* argv[])
 {
-   ex3();
+   for(int i = 0; i < argc; ++i)
+   {
+      std::string name =argv[i];
+      std::cout << name << std::endl;
+   }
+
+   //ex3();
 
    // No requirement to return from main, but we do so for clarity and
    // consistency with other functions.

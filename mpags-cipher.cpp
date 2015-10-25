@@ -8,14 +8,34 @@ void ex2();
 void ex3();
 std::string transformChar(char input);
 bool checkHelp(std::string flag);
+bool checkVersion(std::string flag);
+bool checkOption(std::string option);
+void printOption(std::string filename);
 
 int main(int argc, char* argv[])
 {
    for(int i = 0; i < argc; ++i)
    {
-      std::string name =argv[i];
-      if(!checkHelp(name))
-         std::cout << name << std::endl;
+      std::string arg =argv[i];
+      if(checkHelp(arg))
+         continue;
+      else if(checkVersion(arg))
+         continue;
+      else if(checkOption(arg))
+      {
+         if(i + 1 < argc)
+         {  // Check that the next argument exists
+            printOption(argv[i + 1]);
+            ++i;
+         }
+         else
+         {
+            std::cout << "Error: Expected argument after " << argv[i] <<
+               ". Program exiting." << std::endl;
+         }
+         continue;
+      }
+      std::cout << arg << std::endl;
    }
 
    //ex3();
@@ -127,4 +147,29 @@ bool checkHelp(std::string flag)
    }
 
    return false;
+}
+
+bool checkVersion(std::string flag)
+{
+   if(flag == "--version")
+   {
+      std::cout << "mpags-cipher Version 0.1.0" << std::endl;
+
+      return true;
+   }
+
+   return false;
+}
+
+bool checkOption(std::string option)
+{
+   if(option == "-i" || option == "-o")
+      return true;
+
+   return false;
+}
+
+void printOption(std::string filename)
+{
+   std::cout << "Filename: " << filename << std::endl;
 }

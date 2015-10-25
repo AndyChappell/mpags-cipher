@@ -23,3 +23,21 @@ Andy Chappell
 # Documentation
 
 Documentation will be added here...
+
+# Source Code Layout
+Under this directory, the code and associated files are organised as
+follows:
+
+.
++-- LICENSE
++-- CMakeLists.txt
++-- Documentation
+¦   +-- CMakeLists.txt
+¦   +-- Doxyfile.in
++-- MPAGSCipher
+¦   +-- CMakeLists.txt
++-- README.md
++-- Testing
+¦   +-- catch.hpp
+¦   +-- CMakeLists.txt
++-- mpags-cipher.cpp

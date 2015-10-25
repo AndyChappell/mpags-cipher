@@ -2,8 +2,21 @@
 
 #include <iostream>
 #include <string>
+#include <cctype>
+
+void ex2();
+void ex3();
 
 int main()
+{
+   ex3();
+
+   // No requirement to return from main, but we do so for clarity and
+   // consistency with other functions.
+   return 0;
+}
+
+void ex2()
 {
    // This is a comment
    /* This is a
@@ -40,8 +53,57 @@ int main()
    // Create a char using auto and assign a letter from the string to it
    auto myChar = myStr[2];
    cout << "The character: " << myChar << endl;
+}
 
-  // No requirement to return from main, but we do so for clarity and
-  // consistency with other functions.
-  return 0;
+void ex3()
+{
+   using namespace std;
+
+   char input{'\0'};
+   while(cin >> input)
+   {  // Loop until the user presses enter and Ctrl-D
+      switch(input)
+      {
+         case '1':
+            cout << "ONE";
+            break;
+         case '2':
+            cout << "TWO";
+            break;
+         case '3':
+            cout << "THREE";
+            break;
+         case '4':
+            cout << "FOUR";
+            break;
+         case '5':
+            cout << "FIVE";
+            break;
+         case '6':
+            cout << "SIX";
+            break;
+         case '7':
+            cout << "SEVEN";
+            break;
+         case '8':
+            cout << "EIGHT";
+            break;
+         case '9':
+            cout << "NINE";
+            break;
+         case '0':
+            cout << "ZERO";
+            break;
+         default:
+            if(isalpha(input))
+            {
+               if(islower(input))
+                  cout << char(toupper(input));
+               else
+                  cout << input;
+            }
+
+            break;
+      }
+   }
 }

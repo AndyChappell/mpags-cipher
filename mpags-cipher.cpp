@@ -6,6 +6,7 @@
 
 void ex2();
 void ex3();
+std::string transformChar(char input);
 
 int main()
 {
@@ -57,53 +58,51 @@ void ex2()
 
 void ex3()
 {
-   using namespace std;
-
    char input{'\0'};
-   while(cin >> input)
+   while(std::cin >> input)
    {  // Loop until the user presses enter and Ctrl-D
-      switch(input)
-      {
-         case '1':
-            cout << "ONE";
-            break;
-         case '2':
-            cout << "TWO";
-            break;
-         case '3':
-            cout << "THREE";
-            break;
-         case '4':
-            cout << "FOUR";
-            break;
-         case '5':
-            cout << "FIVE";
-            break;
-         case '6':
-            cout << "SIX";
-            break;
-         case '7':
-            cout << "SEVEN";
-            break;
-         case '8':
-            cout << "EIGHT";
-            break;
-         case '9':
-            cout << "NINE";
-            break;
-         case '0':
-            cout << "ZERO";
-            break;
-         default:
-            if(isalpha(input))
-            {
-               if(islower(input))
-                  cout << char(toupper(input));
-               else
-                  cout << input;
-            }
+      std::cout << transformChar(input);
+   }
+}
 
-            break;
-      }
+/*
+   Takes alphanumeric characters and converts them to uppercase, with numeric
+   digits replaced by their equivalent words.
+*/
+std::string transformChar(char input)
+{
+   switch(input)
+   {
+      case '1':
+         return "ONE";
+      case '2':
+         return "TWO";
+      case '3':
+         return "THREE";
+      case '4':
+         return "FOUR";
+      case '5':
+         return "FIVE";
+      case '6':
+         return "SIX";
+      case '7':
+         return "SEVEN";
+      case '8':
+         return "EIGHT";
+      case '9':
+         return "NINE";
+      case '0':
+         return "ZERO";
+      default:
+         if(isalpha(input))
+         {
+            std::string s{""};
+            if(islower(input))
+               return std::string(1, char(toupper(input)));
+            else
+               return std::string(1, input);
+         }
+         else
+            return "";
    }
 }

@@ -16,11 +16,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # - Use our standard set of flags if the GNU/Clang compilers
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
-  set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wfatal-errors -Wshadow -pedantic")
+  set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wfatal-errors -Wshadow -pedantic")
 endif()
 
 # - Override the default g++4.3.4 compiler and use a compiler supporting C++11
-set(CMAKE_CXX_COMPILER g++-4.9)
+#set(CMAKE_CXX_COMPILER g++-4.9)
 
 # - Declare the build of mpags-cipher main program
 add_executable(mpags-cipher mpags-cipher.cpp)

@@ -4,88 +4,21 @@
 #include <string>
 #include <cctype>
 
-void ex2();
-void ex3();
+void day2Ex1();
 std::string transformChar(char input);
-bool checkHelp(std::string flag);
-bool checkVersion(std::string flag);
-bool checkOption(std::string option);
-void printOption(std::string filename);
 
-int main(int argc, char* argv[])
+int main()
 {
-   for(int i = 0; i < argc; ++i)
-   {
-      std::string arg =argv[i];
-      if(checkHelp(arg))
-         continue;
-      else if(checkVersion(arg))
-         continue;
-      else if(checkOption(arg))
-      {
-         if(i + 1 < argc)
-         {  // Check that the next argument exists
-            printOption(argv[i + 1]);
-            ++i;
-         }
-         else
-         {
-            std::cout << "Error: Expected argument after " << argv[i] <<
-               ". Program exiting." << std::endl;
-         }
-         continue;
-      }
-      std::cout << arg << std::endl;
-   }
+   day2Ex1();
 
-   //ex3();
-
-   // No requirement to return from main, but we do so for clarity and
-   // consistency with other functions.
    return 0;
 }
 
-void ex2()
+void day2Ex1()
 {
-   // This is a comment
-   /* This is a
-    * Multiline comment */
-   using namespace std;
-
-   cout << "Hello World!\n";
-
-   // Create, modify and output int
-   int myInt1{4};
-   myInt1 = 7;
-   cout << myInt1 << endl;
-
-   // Create and output a constant double
-   const double myDouble1{8.4};
-   cout << myDouble1 << endl;
-
-   // Output the product of the double and int
-   cout << myInt1 * myDouble1 << endl;
-
-   // Attempt to initialise an int from a double
-   int myInt2{myDouble1};
-
-   // Create a bool variable using the auto keyword
-   auto myBool = true;
-
-   // Divide a double and an int and then two ints
-   cout << "Double / Int: " << myDouble1 / myInt1 << " Int / Int: " <<
-      myInt1 / myInt2 << endl;
-
-   // Create and initialise a string variable
-   string myStr{"Test string"};
-
-   // Create a char using auto and assign a letter from the string to it
-   auto myChar = myStr[2];
-   cout << "The character: " << myChar << endl;
-}
-
-void ex3()
-{
+	/*
+    * Solution for Exercise 1 of Day 2.
+    * */
    char input{'\0'};
    while(std::cin >> input)
    {  // Loop until the user presses enter and Ctrl-D
@@ -93,12 +26,20 @@ void ex3()
    }
 }
 
-/*
-   Takes alphanumeric characters and converts them to uppercase, with numeric
-   digits replaced by their equivalent words.
-*/
 std::string transformChar(char input)
 {
+   /*
+    * Transliterates an input character into a purely alphabetical
+    * string.
+    * 
+    * Alpha characters are converted to uppercase, numeric
+    * characters are replaced by their equivalent words and other
+    * characters are omitted.
+    * 
+    * char input: The character to be transliterated
+    * 
+    * return: The transliterated string
+   */
    switch(input)
    {
       case '1':
@@ -125,51 +66,11 @@ std::string transformChar(char input)
          if(isalpha(input))
          {
             std::string s{""};
-            if(islower(input))
-               return std::string(1, char(toupper(input)));
-            else
-               return std::string(1, input);
+            return std::string(1, char(toupper(input)));
          }
          else
+         {
             return "";
+         }
    }
-}
-
-bool checkHelp(std::string flag)
-{
-   if(flag == "-h" || flag == "--help")
-   {
-      std::cout << "Usage: mpags-cipher [arguments]" << std::endl;
-      std::cout << "Please provide a list of arguments which will be printed"
-         << " out by the program." << std::endl;
-
-      return true;
-   }
-
-   return false;
-}
-
-bool checkVersion(std::string flag)
-{
-   if(flag == "--version")
-   {
-      std::cout << "mpags-cipher Version 0.1.0" << std::endl;
-
-      return true;
-   }
-
-   return false;
-}
-
-bool checkOption(std::string option)
-{
-   if(option == "-i" || option == "-o")
-      return true;
-
-   return false;
-}
-
-void printOption(std::string filename)
-{
-   std::cout << "Filename: " << filename << std::endl;
 }

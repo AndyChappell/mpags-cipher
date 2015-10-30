@@ -12,6 +12,24 @@ The encryption/decryption options will include:
 
 Ciphertext will be written to screen or file.  
 
+# How to build
+
+Create a directory mpags-cipher.build at the same levels as
+mpags-cipher.git and cd into this directory:
+
+   mkdir mpags-cipher.build
+   cd mpags-cipher.build
+
+Now run cmake, passing the mpags-cipher.git directory as an
+argument:
+
+   cmake ../mpags-cipher.git
+
+This will produce a Makefile in the mpags-cipher.build directory, which
+can be run as:
+
+   make -j2
+
 # How to install
 
 ...  

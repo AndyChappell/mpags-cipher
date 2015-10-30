@@ -32,7 +32,29 @@ can be run as:
 
 # How to install
 
-...  
+cd to the mpags-cipher.build directory:
+
+   cd mpags-cipher.build
+
+Now run the installation with the following command:
+
+   make install
+
+This should add the mpags-cipher executable to the directory
+~/Software/
+
+# How to package
+
+cd to the mpags-cipher.build directory:
+
+   cd mpags-cipher.build
+
+Now run the following make command:
+
+   make package package _ source
+
+This should create a set of tar and tar bundles in the
+mpags-cipher.build directory
 
 # Authors
 
@@ -45,17 +67,18 @@ Documentation will be added here...
 # Source Code Layout
 Under this directory, the code and associated files are organised as
 follows:
-
 .
-+-- LICENSE
-+-- CMakeLists.txt
-+-- Documentation
-¦   +-- CMakeLists.txt
-¦   +-- Doxyfile.in
-+-- MPAGSCipher
-¦   +-- CMakeLists.txt
-+-- README.md
-+-- Testing
-¦   +-- catch.hpp
-¦   +-- CMakeLists.txt
-+-- mpags-cipher.cpp
+|-- CMakeLists.txt
+|-- Documentation
+|   |-- CMakeLists.txt
+|   ` -- Doxyfile.in
+|-- LICENSE
+|-- MPAGSCipher
+|   |-- CMakeLists.txt
+|   |-- TransformChar.cpp
+|   ` -- TransformChar.hpp
+|-- README.md
+|-- Testing
+|   |-- CMakeLists.txt
+|   ` -- catch.hpp
+` -- mpags-cipher.cpp

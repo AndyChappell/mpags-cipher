@@ -2,6 +2,7 @@
 A simple command line tool for encrypting/decrypting text using
 classical ciphers  
 
+<<<<<<< HEAD
 The program will read plaintext from a keyboard or file and the encrypt
 or decrypt the file based on the user's choice.  
 
@@ -65,6 +66,7 @@ Andy Chappell
 Documentation will be added here...
 
 # Source Code Layout
+
 Under this directory, the code and associated files are organised as
 follows:  
 
@@ -83,3 +85,8 @@ follows:
     |   |-- CMakeLists.txt  
     |   `-- catch.hpp  
     `-- mpags-cipher.cpp  
+
+# Copying
+`mpags-cipher` is licensed under the terms of the MIT License. Please see
+the file [`LICENSE`](LICENSE) for full details.
+

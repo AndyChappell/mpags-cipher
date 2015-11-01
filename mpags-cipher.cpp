@@ -5,7 +5,8 @@
 #include <istream>
 #include <fstream>
 
-void transliterate(std::istream& inStream, std::ostream& outStream);
+template <typename T, typename U>
+void transliterate(T& inStream, U& outStream);
 int processCommandLine(const int argc, char* argv[]);
 
 int main(int argc, char* argv[])
@@ -117,8 +118,8 @@ int processCommandLine(const int argc, char* argv[])
 }
 
 
-
-void transliterate(std::istream& inStream, std::ostream& outStream)
+template <typename T, typename U>
+void transliterate(T& inStream, U& outStream)
 {
    /*
     * Solution for Exercise 1 of Day 2.

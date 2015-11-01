@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string transformChar(char input);
+std::string transformChar(const char input);
 
 #endif

@@ -2,18 +2,18 @@
 
 #include <cctype>
 
-std::string transformChar(char input)
+std::string transformChar(const char input)
 {
    /*
     * Transliterates an input character into a purely alphabetical
     * string.
-    * 
+    *
     * Alpha characters are converted to uppercase, numeric
     * characters are replaced by their equivalent words and other
     * characters are omitted.
-    * 
+    *
     * char input: The character to be transliterated
-    * 
+    *
     * return: The transliterated string
    */
    switch(input)

@@ -2,7 +2,6 @@
 A simple command line tool for encrypting/decrypting text using
 classical ciphers  
 
-<<<<<<< HEAD
 The program will read plaintext from a keyboard or file and the encrypt
 or decrypt the file based on the user's choice.  
 
@@ -63,7 +62,20 @@ Andy Chappell
 
 # Documentation
 
-Documentation will be added here...
+mpags-cipher can be run as
+
+    mpags-cipher
+    Available options:
+        -h | --help      Print this help message
+        --version        Print version information
+        -i <filename>    Read text to be processed from <filename>
+                         Standard input will be used if not supplied
+        -o <filename>    Write processed text to <filename>
+                         Standard output will be used if not supplied
+        -e <key>         Encrypt input text with key value <key>
+                         Key must be in the range [0, 25]
+        -d <key>         Decrypt input text with key value <key>
+                         Key must be in the range [0, 25]
 
 # Source Code Layout
 

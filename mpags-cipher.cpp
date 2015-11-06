@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
       }
    }
    
-   CaesarCipher(args.inputFilename.empty() ? std::cin : inputStream,
+   caesarCipher(args.inputFilename.empty() ? std::cin : inputStream,
       args.outputFilename.empty() ? std::cout : outputStream, args.key,
       args.encrypt);
    

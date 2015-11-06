@@ -1,16 +1,20 @@
 #include "CaesarCipher.hpp"
 
+CaesarCipher::CaesarCipher(int key) : key_{key}
+{
+}
+
 void testCipher()
 {
    std::istringstream plainstream("HELLOWORLD");
    std::ostringstream cipherstream{""};
 
-   CaesarCipher(plainstream, cipherstream, 5, true);
+   caesarCipher(plainstream, cipherstream, 5, true);
 
    std::istringstream codestream{cipherstream.str()};
    std::ostringstream outputstream{""};
 
-   CaesarCipher(codestream, outputstream, 5, false);
+   caesarCipher(codestream, outputstream, 5, false);
 
    std::string originalText{plainstream.str()};
    std::string decodedText{outputstream.str()};

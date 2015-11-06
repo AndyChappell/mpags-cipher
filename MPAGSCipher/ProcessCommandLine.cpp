@@ -11,8 +11,12 @@ int processCommandLine(const int argc, char* argv[],
       Non-flag and non-option arguments are printed to the terminal, with flags
       and options printing relevant information to the terminal.
 
-      const int argc: A count of the number of arguments passed to the program
-      char* argv[]: The list of arguments passed to the program
+      const int argc:            A count of the number of arguments
+                                 passed to the program
+      char* argv[]:              The list of arguments passed to the
+                                 program
+      CommandLineArguments args: A structure to store the commandline
+                                 arguments
          Options:
             -h | --help:   Prints usage information.
             -- version:    Prints version information.

@@ -7,8 +7,18 @@
 #include <iostream>
 #include <sstream>
 
+class CaesarCipher
+{
+	public:
+	CaesarCipher(int key);
+	
+	private:
+	int key_;
+};
+
 template <typename T, typename U>
-void CaesarCipher(T& inStream, U& outStream, const int k, const bool encrypt = true)
+void caesarCipher(T& inStream, U& outStream, const int k,
+	const bool encrypt = true)
 {
    /*
       Applies Caesar Cipher encryption and decryption.
@@ -38,6 +48,7 @@ void CaesarCipher(T& inStream, U& outStream, const int k, const bool encrypt = t
          outStream << cipherChar;
       }
    }
+   outStream << std::endl;
 }
 
 void testCipher();

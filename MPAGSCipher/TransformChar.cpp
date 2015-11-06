@@ -1,6 +1,8 @@
 #include "TransformChar.hpp"
 
+#include <iostream>
 #include <cctype>
+#include <sstream>
 
 std::string transformChar(const char input)
 {
@@ -49,4 +51,28 @@ std::string transformChar(const char input)
             return "";
          }
    }
+}
+
+std::string transformString(const std::string& input)
+{
+   /*
+    * Transliterates an input string into a purely alphabetical
+    * string.
+    *
+    * Alpha characters are converted to uppercase, numeric
+    * characters are replaced by their equivalent words and other
+    * characters are omitted.
+    *
+    * std::string input: The string to be transliterated
+    *
+    * return: The transliterated string
+   */
+   std::ostringstream transliterationStream{""};
+   for(char c : input)
+   {
+	   std::string transString = transformChar(c);
+	   transliterationStream << transString;
+   }
+   
+   return transliterationStream.str();
 }

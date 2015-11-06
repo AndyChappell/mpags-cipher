@@ -11,6 +11,7 @@ class CaesarCipher
 {
 	public:
 	CaesarCipher(int key);
+	std::string encode(const std::string& plaintext) const;
 	
 	private:
 	int key_;

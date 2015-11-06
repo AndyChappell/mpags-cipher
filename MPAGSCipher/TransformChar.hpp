@@ -4,5 +4,6 @@
 #include <string>
 
 std::string transformChar(const char input);
+std::string transformString(const std::string& input);
 
 #endif

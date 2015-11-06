@@ -7,14 +7,30 @@
 #include <iostream>
 #include <sstream>
 
+/**
+	CaesarCipher provides encoding (decoding) of plaintext (ciphertext)
+	using the Caesar Cipher.
+ */
 class CaesarCipher
 {
 	public:
+	/**
+		Create a CaesarCipher with a specified key.
+
+		\param key The key to use for encoding/decoding
+	 */
 	CaesarCipher(int key);
+	
+	/**
+		Encodes specified plaintext.
+		
+		\param plaintext The plaintext to encode
+		\return The encoded ciphertext
+	 */
 	std::string encode(const std::string& plaintext) const;
 	
 	private:
-	int key_;
+	int key_;	///< The key to use for encoding/decoding
 };
 
 template <typename T, typename U>

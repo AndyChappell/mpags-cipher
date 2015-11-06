@@ -6,12 +6,6 @@ CaesarCipher::CaesarCipher(int key) : key_{key}
 
 std::string CaesarCipher::encode(const std::string& plaintext) const
 {
-   /*
-      Encodes the string provided.
-
-      const std::string& plaintext:	The plaintext to encode
-      return std:string				The ciphertext
-   */
    const int NUM_CHAR{26};
    std::ostringstream cipherStream{""};
    std::string transString{transformString(plaintext)};

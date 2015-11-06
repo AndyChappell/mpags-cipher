@@ -5,6 +5,7 @@
 int main(int argc, char* argv[])
 {
    //testCipher();
-   return processCommandLine(argc, argv);
+   CommandLineArguments args{false, false, false, 0, "", ""};
+   return processCommandLine(argc, argv, args);
 }
 

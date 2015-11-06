@@ -2,6 +2,7 @@
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
+#include "IOProcessing.hpp"
 
 #include <iostream>
 #include <istream>
@@ -40,14 +41,25 @@ int main(int argc, char* argv[])
          return 1;
       }
    }
-   
+     
+   std::string input = processInput(
+      args.inputFilename.empty() ? std::cin : inputStream);
+
    CaesarCipher caesar{args.key};
-   std::string ciphertext = caesar.encode("hello world");
-   std::cout << "Standalone test of encode member function: " << ciphertext << std::endl;
-   
-   caesarCipher(args.inputFilename.empty() ? std::cin : inputStream,
-      args.outputFilename.empty() ? std::cout : outputStream, args.key,
-      args.encrypt);      
+   if(args.encrypt)
+   {
+      std::string ciphertext = caesar.encode(input);
+      processOutput(
+         args.outputFilename.empty() ? std::cout : outputStream,
+         ciphertext);
+   }
+   else
+   {
+      std::string plaintext = caesar.decode(input);
+      processOutput(
+         args.outputFilename.empty() ? std::cout : outputStream,
+         plaintext);      
+   }
   
    return 0;
 }

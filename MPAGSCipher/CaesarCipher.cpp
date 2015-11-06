@@ -23,6 +23,25 @@ std::string CaesarCipher::encode(const std::string& plaintext) const
    return cipherStream.str();
 }
 
+std::string CaesarCipher::decode(const std::string& ciphertext) const
+{
+   const int NUM_CHAR{26};
+   std::ostringstream plainStream{""};
+   std::string transString{transformString(ciphertext)};
+   for(char c : transString)
+   {
+      int plainVal{((c - 'A') - key_) % NUM_CHAR};
+      if(plainVal < 0)
+      {
+         plainVal += NUM_CHAR;
+      }
+      char plainChar = 'A' + plainVal;
+      plainStream << plainChar;
+   }
+
+   return plainStream.str();
+}
+
 void testCipher()
 {
    std::istringstream plainstream("HELLOWORLD");

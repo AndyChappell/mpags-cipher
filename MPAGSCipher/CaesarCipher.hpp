@@ -8,6 +8,16 @@
 #include <sstream>
 
 /**
+	CipherMode specifies the mode of a CaesarCipher as being encryption
+	or decryption.
+ */
+enum class CipherMode
+{
+	Encrypt,	///< Encryption mode
+	Decrypt		///< Decryption mode
+};
+
+/**
 	CaesarCipher provides encoding (decoding) of plaintext (ciphertext)
 	using the Caesar Cipher.
  */

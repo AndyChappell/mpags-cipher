@@ -1,9 +1,6 @@
 #include "ProcessCommandLine.hpp"
-#include "CaesarCipher.hpp"
 
 #include <iostream>
-#include <istream>
-#include <fstream>
 
 int processCommandLine(const int argc, char* argv[],
 	CommandLineArguments& args)
@@ -56,7 +53,7 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected argument after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 1;
+            return 2;
          }
       }
       else if(argStr == "-o")
@@ -70,7 +67,7 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected argument after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 1;
+            return 2;
          }
       }
       else if(argStr == "-e")
@@ -85,7 +82,7 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected key after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 1;
+            return 2;
          }
       }
       else if(argStr == "-d")
@@ -100,13 +97,13 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected key after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 1;
+            return 2;
          }
       }
       else
       {
          std::cout << "Error: Unknown argument '" << argStr << "'\n";
-         return 1;
+         return 2;
       }
    }
    
@@ -125,46 +122,19 @@ int processCommandLine(const int argc, char* argv[],
          << "                    Key must be in the range [0, 25]\n"
          << "   -d <key>         Decrypt input text with key value <key>\n"
          << "                    Key must be in the range [0, 25]\n";
-      return 0;
+      return 1;
    }
    else if(args.versionRequested)
    {
       std::cout << "mpags-cipher Version 0.1.0" << std::endl;
-      return 0;
-   }
-
-   // Use standard input by default
-   std::ifstream inputStream{};
-   if(!args.inputFilename.empty())
-   {  // Try to use the input file
-      inputStream.open(args.inputFilename);
-      if(!inputStream.good())
-      {
-         std::cout << "Error: Could not open " << args.inputFilename << std::endl;
-         return 1;
-      }
-   }
-
-   std::ofstream outputStream{};
-   if(!args.outputFilename.empty())
-   {  // Try to use the output file
-      outputStream.open(args.outputFilename);
-      if(!outputStream.good())
-      {
-         std::cout << "Error: Could not open " << args.outputFilename << std::endl;
-         return 1;
-      }
+      return 1;
    }
 
    if(args.key < 0 || args.key > 25)
    {
       std::cout << "Error: Key must be in range [0, 25]" << std::endl;
-      return 1;
+      return 2;
    }
-
-   CaesarCipher(args.inputFilename.empty() ? std::cin : inputStream,
-      args.outputFilename.empty() ? std::cout : outputStream, args.key,
-      args.encrypt);
 
    return 0;
 }

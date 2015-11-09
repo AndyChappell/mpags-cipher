@@ -1,9 +1,10 @@
 #include "ProcessCommandLine.hpp"
 
+#include <cstdlib>
 #include <iostream>
 
 int processCommandLine(const int argc, char* argv[],
-	CommandLineArguments& args)
+   CommandLineArguments& args)
 {
    /*
       Processes command line arguments.
@@ -110,7 +111,7 @@ int processCommandLine(const int argc, char* argv[],
          return 2;
       }
    }
-   
+
    if(args.helpRequested)
    {
       std::cout << "Usage: mpags-cipher [-i <file>] [-o <file>]\n\n"

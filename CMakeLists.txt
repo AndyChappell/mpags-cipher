@@ -3,7 +3,7 @@
 
 # - Set CMake requirements then declare project
 cmake_minimum_required(VERSION 3.2)
-project(MPAGSCipher VERSION 0.1.0)
+project(MPAGSCipher VERSION 0.2.0)
 
 # - When Makefiles are generated, output all command lines by default
 #   Do this to begin with so it's easy to see what compiler commands/flags
@@ -19,8 +19,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
   set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wfatal-errors -Wshadow -pedantic")
 endif()
 
-# - Override the default g++4.3.4 compiler and use a compiler supporting C++11
-#set(CMAKE_CXX_COMPILER g++-4.9)
+# - Add the MPAGSCipher subdirectory to the build
+add_subdirectory(MPAGSCipher)
 
 # - Declare the build of mpags-cipher main program
 add_executable(mpags-cipher
@@ -33,9 +33,11 @@ add_executable(mpags-cipher
   MPAGSCipher/ProcessCommandLine.cpp
   MPAGSCipher/IOProcessing.hpp
   )
+
 target_include_directories(mpags-cipher
   PRIVATE MPAGSCipher
   )
+
 target_compile_features(mpags-cipher
   PRIVATE cxx_auto_type cxx_constexpr cxx_nullptr cxx_range_for cxx_uniform_initialization
   )

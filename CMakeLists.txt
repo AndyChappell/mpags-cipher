@@ -23,24 +23,8 @@ endif()
 add_subdirectory(MPAGSCipher)
 
 # - Declare the build of mpags-cipher main program
-add_executable(mpags-cipher
-  mpags-cipher.cpp
-  MPAGSCipher/TransformChar.hpp
-  MPAGSCipher/TransformChar.cpp
-  MPAGSCipher/CaesarCipher.hpp
-  MPAGSCipher/CaesarCipher.cpp
-  MPAGSCipher/ProcessCommandLine.hpp
-  MPAGSCipher/ProcessCommandLine.cpp
-  MPAGSCipher/IOProcessing.hpp
-  )
-
-target_include_directories(mpags-cipher
-  PRIVATE MPAGSCipher
-  )
-
-target_compile_features(mpags-cipher
-  PRIVATE cxx_auto_type cxx_constexpr cxx_nullptr cxx_range_for cxx_uniform_initialization
-  )
+add_executable(mpags-cipher mpags-cipher.cpp)
+target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)
 
 # - Install mpags-cipher using UNIX/GNU directory structure
 include(GNUInstallDirs)

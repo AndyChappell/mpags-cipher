@@ -22,6 +22,10 @@ endif()
 # - Add the MPAGSCipher subdirectory to the build
 add_subdirectory(MPAGSCipher)
 
+# - Enable testing and add the Testing subdirectory to the build
+enable_testing()
+add_subdirectory(Testing)
+
 # - Declare the build of mpags-cipher main program
 add_executable(mpags-cipher mpags-cipher.cpp)
 target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)

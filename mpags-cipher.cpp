@@ -11,7 +11,7 @@
 int main(int argc, char* argv[])
 {
    //testCipher();
-   CommandLineArguments args{false, false, false, 0, "", ""};
+   CommandLineArguments args{false, false, false, 0, "", "", ""};
    int retCode = processCommandLine(argc, argv, args);
    
    if(retCode != 0)

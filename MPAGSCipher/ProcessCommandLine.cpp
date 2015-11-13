@@ -34,6 +34,7 @@ int processCommandLine(const int argc, char* argv[],
    args.encrypt = true;
    args.helpRequested = false;
    args.versionRequested = false;
+   args.cipher = "";
 
    for(int i = 1; i < argc; ++i)
    {
@@ -102,6 +103,24 @@ int processCommandLine(const int argc, char* argv[],
             std::cout << "Error: Expected key after " << argv[i] <<
                ". Program exiting." << std::endl;
             return 4;
+         }
+      }
+      else if(argStr == "--cipher")
+      {  // Cipher specified
+         if(i + 1 < argc && (std::string(argv[i + 1]) == "caesar" ||
+            std::string(argv[i + 1]) == "playfair"))
+         {  // Check that the next argument exists and is not a flag or option
+            args.cipher = std::string(argv[i + 1]);
+            ++i;
+         }
+         else
+         {  // Missing argument
+            std::cout << "Error: Expected cipher name after "
+               << argv[i] << ".\n\n"
+               << "Available options:\n"
+               << "   caesar\n"
+               << "   playfair\n" << std::endl;
+            return 6;
          }
       }
       else

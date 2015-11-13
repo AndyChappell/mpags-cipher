@@ -11,6 +11,7 @@ struct CommandLineArguments
 	int key;
 	std::string inputFilename;
 	std::string outputFilename;
+	std::string cipher;
 };
 
 int processCommandLine(const int argc, char* argv[],

@@ -8,3 +8,8 @@ target_include_directories(Catch INTERFACE ${CMAKE_CURRENT_LIST_DIR})
 add_executable(testTransformChar testTransformChar.cpp)
 target_link_libraries(testTransformChar MPAGSCipher Catch)
 add_test(NAME test-transformchar COMMAND testTransformChar -s)
+
+# ProcessCommandLine test
+add_executable(testProcessCommandLine testProcessCommandLine.cpp)
+target_link_libraries(testProcessCommandLine MPAGSCipher Catch)
+add_test(NAME test-processcommandline COMMAND testProcessCommandLine -s)

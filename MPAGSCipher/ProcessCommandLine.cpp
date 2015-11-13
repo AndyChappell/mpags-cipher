@@ -24,10 +24,9 @@ int processCommandLine(const int argc, char* argv[],
             -i <filename>: Prints input filename <file>.
             -o <filename>: Prints output filename <file>.
             -e <key>       Encrypt input text with key value <key>
-                           Key must be in the range [0, 25]
+                           Key must be in the range [0, 25].
             -d <key>       Decrypt input text with key value <key>
-                           Key must be in the range [0, 25]
-            <other>:       Prints <other>.
+                           Key must be in the range [0, 25].
    */
    args.inputFilename = "";
    args.outputFilename = "";
@@ -58,7 +57,7 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected argument after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 2;
+            return 1;
          }
       }
       else if(argStr == "-o")
@@ -87,7 +86,7 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected key after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 2;
+            return 3;
          }
       }
       else if(argStr == "-d")
@@ -102,13 +101,13 @@ int processCommandLine(const int argc, char* argv[],
          {  // Missing argument
             std::cout << "Error: Expected key after " << argv[i] <<
                ". Program exiting." << std::endl;
-            return 2;
+            return 4;
          }
       }
       else
       {
          std::cout << "Error: Unknown argument '" << argStr << "'\n";
-         return 2;
+         return 5;
       }
    }
 
@@ -127,12 +126,12 @@ int processCommandLine(const int argc, char* argv[],
          << "                    Key must be in the range [0, 25]\n"
          << "   -d <key>         Decrypt input text with key value <key>\n"
          << "                    Key must be in the range [0, 25]\n";
-      return 1;
+      return 0;
    }
    else if(args.versionRequested)
    {
       std::cout << "mpags-cipher Version 0.1.0" << std::endl;
-      return 1;
+      return 0;
    }
 
    if(args.key < 0 || args.key > 25)

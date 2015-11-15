@@ -187,17 +187,6 @@ int processCommandLine(const int argc, char* argv[],
          std::cout << "Error: Maximum key length is 25 characters" << std::endl;
          return 7;
       }
-      else
-      {
-         for(auto c : args.key)
-         {
-            if(!std::isalpha(c))
-            {
-               std::cout << "Error: Key must only contain alphabetic characters" << std::endl;
-               return 8;
-            }
-         }
-      }
    }
 
    return 0;

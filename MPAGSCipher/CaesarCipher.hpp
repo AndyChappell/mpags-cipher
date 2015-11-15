@@ -1,21 +1,12 @@
 #ifndef MPAGSCIPHER_CAESARCIPHER_HPP
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 
+#include "CipherMode.hpp"
 #include "TransformChar.hpp"
 
 #include <string>
 #include <iostream>
 #include <sstream>
-
-/**
-	CipherMode specifies the mode of a CaesarCipher as being encryption
-	or decryption.
- */
-enum class CipherMode
-{
-	Encrypt,	///< Encryption mode
-	Decrypt		///< Decryption mode
-};
 
 /**
 	CaesarCipher provides encoding (decoding) of plaintext (ciphertext)

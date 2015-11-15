@@ -4,11 +4,14 @@
 add_library(MPAGSCipher STATIC
   CaesarCipher.hpp
   CaesarCipher.cpp
+  PlayfairCipher.hpp
+  PlayfairCipher.cpp
   ProcessCommandLine.hpp
   ProcessCommandLine.cpp
   IOProcessing.hpp
   TransformChar.hpp
   TransformChar.cpp
+  CipherMode.hpp
   )
 
 target_include_directories(MPAGSCipher

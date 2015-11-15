@@ -2,6 +2,7 @@
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
+#include "PlayfairCipher.hpp"
 #include "IOProcessing.hpp"
 
 #include <iostream>
@@ -11,7 +12,7 @@
 int main(int argc, char* argv[])
 {
    //testCipher();
-   CommandLineArguments args{false, false, false, 0, "", "", ""};
+   CommandLineArguments args{false, false, false, "", "", "", ""};
    int retCode = processCommandLine(argc, argv, args);
    
    if(retCode != 0)
@@ -45,20 +46,42 @@ int main(int argc, char* argv[])
    std::string input = processInput(
       args.inputFilename.empty() ? std::cin : inputStream);
 
-   CaesarCipher caesar{args.key};
-   if(args.encrypt)
+   if(args.cipher == "caesar")
    {
-      std::string ciphertext = caesar.encode(input);
-      processOutput(
-         args.outputFilename.empty() ? std::cout : outputStream,
-         ciphertext);
+      CaesarCipher cipher{args.key};
+      if(args.encrypt)
+      {
+         std::string ciphertext = cipher.encode(input);
+         processOutput(
+            args.outputFilename.empty() ? std::cout : outputStream,
+            ciphertext);
+      }
+      else
+      {
+         std::string plaintext = cipher.decode(input);
+         processOutput(
+            args.outputFilename.empty() ? std::cout : outputStream,
+            plaintext);      
+      }
    }
-   else
+   else if(args.cipher == "playfair")
    {
-      std::string plaintext = caesar.decode(input);
-      processOutput(
-         args.outputFilename.empty() ? std::cout : outputStream,
-         plaintext);      
+      PlayfairCipher cipher{};
+      cipher.setKey(args.key);
+      if(args.encrypt)
+      {
+         std::string ciphertext = cipher.encode(input);
+         processOutput(
+            args.outputFilename.empty() ? std::cout : outputStream,
+            ciphertext);
+      }
+      else
+      {/*
+         std::string plaintext = cipher.decode(input);
+         processOutput(
+            args.outputFilename.empty() ? std::cout : outputStream,
+            plaintext);*/
+      }
    }
   
    return 0;

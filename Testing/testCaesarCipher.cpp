@@ -7,13 +7,13 @@
 TEST_CASE("Caesar Cipher encoding", "[cipher]"){
    std::string plaintext{"Hello world!"};
 
-   CaesarCipher caesar{5};
+   CaesarCipher caesar{"5"};
 	REQUIRE(caesar.encode(plaintext) == "MJQQTBTWQI");
 }
 
 TEST_CASE("Caesar Cipher decoding", "[cipher]"){
    std::string ciphertext{"MJQQTBTWQI"};
 
-   CaesarCipher caesar{5};
+   CaesarCipher caesar{"5"};
 	REQUIRE(caesar.decode(ciphertext) == "HELLOWORLD");
 }

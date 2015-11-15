@@ -19,18 +19,21 @@ int processCommandLine(const int argc, char* argv[],
       CommandLineArguments args: A structure to store the commandline
                                  arguments
          Options:
-            -h | --help:   Prints usage information.
-            -- version:    Prints version information.
-            -i <filename>: Prints input filename <file>.
-            -o <filename>: Prints output filename <file>.
-            -e <key>       Encrypt input text with key value <key>
-                           Key must be in the range [0, 25].
-            -d <key>       Decrypt input text with key value <key>
-                           Key must be in the range [0, 25].
+            -h | --help:         Prints usage information.
+            -- version:          Prints version information.
+            -i <filename>:       Prints input filename <file>.
+            -o <filename>:       Prints output filename <file>.
+            -e <key>             Encrypt input text with key value <key>
+                                 Key must be in the range [0, 25].
+            -d <key>             Decrypt input text with key value <key>
+                                 Key must be in the range [0, 25].
+            --cipher <cipher>    Sets the encryption/decryption cipher
+                                 Key must take one of the values:
+                                 (caesar, playfair)
    */
    args.inputFilename = "";
    args.outputFilename = "";
-   args.key = 0;
+   args.key = "";
    args.encrypt = true;
    args.helpRequested = false;
    args.versionRequested = false;
@@ -80,7 +83,7 @@ int processCommandLine(const int argc, char* argv[],
          if(i + 1 < argc && argv[i + 1][0] != '-')
          {  // Check that the next argument exists and is not a flag or option
             args.encrypt = true;
-            args.key = std::atoi(argv[i + 1]);
+            args.key = argv[i + 1];
             ++i;
          }
          else
@@ -95,7 +98,7 @@ int processCommandLine(const int argc, char* argv[],
          if(i + 1 < argc && argv[i + 1][0] != '-')
          {  // Check that the next argument exists and is not a flag or option
             args.encrypt = false;
-            args.key = std::atoi(argv[i + 1]);
+            args.key = argv[i + 1];
             ++i;
          }
          else
@@ -135,16 +138,23 @@ int processCommandLine(const int argc, char* argv[],
       std::cout << "Usage: mpags-cipher [-i <file>] [-o <file>]\n\n"
          << "Encrypts/Decrypts input alphanumeric text\n\n"
          << "Available options:\n"
-         << "   -h | --help      Print this help message and exit\n"
-         << "   --version        Print version information and exit\n"
-         << "   -i <filename>    Read text to be processed from <filename>\n"
-         << "                    Standard input will be used if not supplied\n"
-         << "   -o <filename>    Write processed text to <filename>\n"
-         << "                    Standard output will be used if not supplied\n"
-         << "   -e <key>         Encrypt input text with key value <key>\n"
-         << "                    Key must be in the range [0, 25]\n"
-         << "   -d <key>         Decrypt input text with key value <key>\n"
-         << "                    Key must be in the range [0, 25]\n";
+         << "   -h | --help         Print this help message and exit\n"
+         << "   --version           Print version information and exit\n"
+         << "   -i <filename>       Read text to be processed from <filename>\n"
+         << "                       Standard input will be used if not supplied\n"
+         << "   -o <filename>       Write processed text to <filename>\n"
+         << "                       Standard output will be used if not supplied\n"
+         << "   -e <key>            Encrypt input text with key value <key>\n"
+         << "                       Options:\n"
+         << "                          Range [1, 25] for Caesar cipher\n"
+         << "                          Upto 25 alphabetic character string for Playfair cipher\n"
+         << "   -d <key>            Decrypt input text with key value <key>\n"
+         << "                       Options:\n"
+         << "                          Range [1, 25] for Caesar cipher\n"
+         << "                          Upto 25 alphabetic character string for Playfair cipher\n"
+         << "   --cipher <cipher>   Sets the encryption/decryption cipher\n"
+         << "                       Key must take one of the values:\n"
+         << "                       (caesar, playfair)\n";
       return 0;
    }
    else if(args.versionRequested)
@@ -153,10 +163,41 @@ int processCommandLine(const int argc, char* argv[],
       return 0;
    }
 
-   if(args.key < 0 || args.key > 25)
+   if(args.cipher == "caesar")
    {
-      std::cout << "Error: Key must be in range [0, 25]" << std::endl;
-      return 2;
+      for(auto c : args.key)
+      {
+         if(!std::isdigit(c))
+         {
+            std::cout << "Error: Key must be in range [1, 25]" << std::endl;
+            return 2;
+         }
+      }
+      int key = std::atoi(args.key.c_str());
+      if(key < 1 || key > 25)
+      {
+         std::cout << "Error: Key must be in range [1, 25]" << std::endl;
+         return 2;
+      }
+   }
+   else if(args.cipher == "playfair")
+   {
+      if(args.key.length() > 25)
+      {
+         std::cout << "Error: Maximum key length is 25 characters" << std::endl;
+         return 7;
+      }
+      else
+      {
+         for(auto c : args.key)
+         {
+            if(!std::isalpha(c))
+            {
+               std::cout << "Error: Key must only contain alphabetic characters" << std::endl;
+               return 8;
+            }
+         }
+      }
    }
 
    return 0;

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <map>
 
 PlayfairCipher::PlayfairCipher()
 {
@@ -24,8 +25,23 @@ void PlayfairCipher::setKey(const std::string& key)
       this->key_.end());
       
    // Change J -> I
+   std::transform(this->key_.begin(), this->key_.end(),
+      this->key_.begin(), [](int c){ return c == 'J' ? 'I' : c; });
 
    // Remove duplicated letters
+   std::map<int, bool> charsUsed{};
+   auto func = [&](int c)
+   {
+      auto iter = charsUsed.find(c);
+      if(iter == charsUsed.end())
+      {
+         charsUsed[c] = true;
+         return false;
+      }
+      return true;
+   };
+   this->key_.erase(std::remove_if(this->key_.begin(), this->key_.end(),
+      func), this->key_.end());
 
    // Store the coords of each letter
 

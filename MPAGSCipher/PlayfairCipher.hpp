@@ -7,11 +7,14 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <utility>
+#include <map>
 
 /**
 	PlayfairCipher provides encoding (decoding) of plaintext (ciphertext)
 	using the Playfair Cipher.
  */
+ 
 class PlayfairCipher
 {
 	public:
@@ -37,6 +40,11 @@ class PlayfairCipher
 	
 	private:
 	std::string key_; ///< The key to use for encoding/decoding
+   std::map<std::pair<int, int>, char> chars_;
+   std::map<char, std::pair<int, int>> coords_;
+   
+   static const int NumRows = 5;
+   static const int NumColumns = 5;
 };
 
 #endif

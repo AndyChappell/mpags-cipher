@@ -62,6 +62,8 @@ void PlayfairCipher::setKey(const std::string& key)
 
 std::string PlayfairCipher::encode(const std::string& plaintext) const
 {
+   std::cout << "Plain: " << plaintext << std::endl;
+   
    // Make sure input is valid
    // (Upper case, only chars and J -> I)
    std::string input{plaintext};
@@ -69,6 +71,8 @@ std::string PlayfairCipher::encode(const std::string& plaintext) const
       input.begin(), (int (*)(int))std::toupper);
    std::transform(input.begin(), input.end(),
       input.begin(), [](int c){ return c == 'J' ? 'I' : c; });
+      
+   std::cout << "J -> I: " << input << std::endl;
    
    // Find repeated chars and add an X
    for(unsigned int i = 0; i < input.size() - 1; ++i)
@@ -80,11 +84,15 @@ std::string PlayfairCipher::encode(const std::string& plaintext) const
       }
    }
    
+   std::cout << "Repeats: " << input << std::endl;
+   
    // if the size is odd, add a trailing Z
    if(input.size() % 2)
    {
       input = input.append("Z");
    }
+   
+   std::cout << "Z?: " << input << std::endl;
 
    // Loop over the input in Digraphs
 
@@ -100,59 +108,44 @@ std::string PlayfairCipher::encode(const std::string& plaintext) const
       
       if(coords1.first == coords2.first)
       {  // Same row
-         std::pair<int, int> firstCoord{coords1};
-         std::pair<int, int> secondCoord{coords2};
-         if(coords1.second < coords2.second)
-         {
-            firstCoord = coords2;
-            secondCoord = std::pair<int, int>{coords2.first,
-               (coords2.second + 1) % NumColumns};
-         }
-         else
-         {
-            firstCoord = coords1;
-            secondCoord = std::pair<int, int>{coords1.first,
-               (coords1.second + 1) % NumColumns};
-         }
+         std::pair<int, int> cipherCoord1{coords1.first,
+            (coords1.second + 1) % NumColumns};
+         std::pair<int, int> cipherCoord2{coords2.first,
+            (coords2.second + 1) % NumColumns};
          
-         std::string firstChar = std::string{this->chars_.at(firstCoord)};
-         std::string secondChar = std::string{this->chars_.at(secondCoord)};
-         ciphertext = ciphertext.append(firstChar + secondChar);
+         std::string cipherChar1 = std::string{
+            this->chars_.at(cipherCoord1)};
+         std::string cipherChar2 = std::string{
+            this->chars_.at(cipherCoord2)};
+         ciphertext = ciphertext.append(cipherChar1 + cipherChar2);
       }
       else if(coords1.second == coords2.second)
       {  // Same column
-         std::pair<int, int> firstCoord{coords1};
-         std::pair<int, int> secondCoord{coords2};
-         if(coords1.first < coords2.first)
-         {
-            firstCoord = coords2;
-            secondCoord = std::pair<int, int>{
-               (coords2.first + 1) % NumRows, coords2.second};
-         }
-         else
-         {
-            firstCoord = coords1;
-            secondCoord = std::pair<int, int>{
-               (coords1.first + 1) % NumRows, coords1.second};
-         }
-         
-         std::string firstChar = std::string{this->chars_.at(secondCoord)};
-         std::string secondChar = std::string{this->chars_.at(firstCoord)};
-         ciphertext = ciphertext.append(firstChar + secondChar);
+         std::pair<int, int> cipherCoord1{(coords1.first + 1) % NumRows,
+            coords1.second};
+         std::pair<int, int> cipherCoord2{(coords2.first + 1) % NumRows,
+            coords2.second};
+                  
+         std::string cipherChar1 = std::string{
+            this->chars_.at(cipherCoord1)};
+         std::string cipherChar2 = std::string{
+            this->chars_.at(cipherCoord2)};
+         ciphertext = ciphertext.append(cipherChar1 + cipherChar2);
       }
       else
       {  // Coords form a rectangle
-         std::pair<int, int> firstCoord{coords1};
-         std::pair<int, int> secondCoord{coords2};
-         
-         firstCoord.second = coords2.second;
-         secondCoord.second = coords1.second;
-         
-         std::string firstChar = std::string{this->chars_.at(firstCoord)};
-         std::string secondChar = std::string{this->chars_.at(secondCoord)};
-         ciphertext = ciphertext.append(firstChar + secondChar);
+         std::pair<int, int> cipherCoord1{coords1.first, coords2.second};
+         std::pair<int, int> cipherCoord2{coords2.first, coords1.second};
+                 
+         std::string cipherChar1 = std::string{
+            this->chars_.at(cipherCoord1)};
+         std::string cipherChar2 = std::string{
+            this->chars_.at(cipherCoord2)};
+         ciphertext = ciphertext.append(cipherChar1 + cipherChar2);
       }
    }
+   
+   std::cout << "Cipher: " << ciphertext << std::endl;
 
    return ciphertext;
 }

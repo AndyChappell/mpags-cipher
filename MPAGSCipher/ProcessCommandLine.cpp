@@ -29,7 +29,7 @@ int processCommandLine(const int argc, char* argv[],
                                  Key must be in the range [0, 25].
             --cipher <cipher>    Sets the encryption/decryption cipher
                                  Key must take one of the values:
-                                 (caesar, playfair)
+                                 (caesar, playfair, vigenere)
    */
    args.inputFilename = "";
    args.outputFilename = "";
@@ -110,11 +110,25 @@ int processCommandLine(const int argc, char* argv[],
       }
       else if(argStr == "--cipher")
       {  // Cipher specified
-         if(i + 1 < argc && (std::string(argv[i + 1]) == "caesar" ||
-            std::string(argv[i + 1]) == "playfair"))
+         if(i + 1 < argc)
          {  // Check that the next argument exists and is not a flag or option
-            args.cipher = std::string(argv[i + 1]);
-            ++i;
+            std::string cipher{argv[i + 1]};
+            if(cipher == "caesar" || cipher == "playfair" ||
+               cipher == "vigenere")
+            {
+               args.cipher = cipher;
+               ++i;
+            }
+            else
+            {
+               std::cout << "Error: Expected cipher name after "
+                  << argv[i] << ".\n\n"
+                  << "Available options:\n"
+                  << "   caesar\n"
+                  << "   playfair\n"
+                  << "   vigenere\n" << std::endl;
+               return 9;
+            }
          }
          else
          {  // Missing argument
@@ -122,7 +136,8 @@ int processCommandLine(const int argc, char* argv[],
                << argv[i] << ".\n\n"
                << "Available options:\n"
                << "   caesar\n"
-               << "   playfair\n" << std::endl;
+               << "   playfair\n"
+               << "   vigenere\n" << std::endl;
             return 6;
          }
       }
@@ -148,13 +163,15 @@ int processCommandLine(const int argc, char* argv[],
          << "                       Options:\n"
          << "                          Range [1, 25] for Caesar cipher\n"
          << "                          Upto 25 alphabetic character string for Playfair cipher\n"
+         << "                          At least 1 alphabetic character for Vigenere cipher\n"
          << "   -d <key>            Decrypt input text with key value <key>\n"
          << "                       Options:\n"
          << "                          Range [1, 25] for Caesar cipher\n"
          << "                          Upto 25 alphabetic character string for Playfair cipher\n"
+         << "                          At least 1 alphabetic character for Vigenere cipher\n"
          << "   --cipher <cipher>   Sets the encryption/decryption cipher\n"
          << "                       Key must take one of the values:\n"
-         << "                       (caesar, playfair)\n";
+         << "                       (caesar, playfair, vigenere)\n";
       return 0;
    }
    else if(args.versionRequested)
@@ -182,12 +199,36 @@ int processCommandLine(const int argc, char* argv[],
    }
    else if(args.cipher == "playfair")
    {
+      for(auto c : args.key)
+      {
+         if(!std::isalpha(c))
+         {
+            std::cout << "Error: Key must be alphabetic" << std::endl;
+            return 10;
+         }
+      }
       if(args.key.length() > 25)
       {
          std::cout << "Error: Maximum key length is 25 characters" << std::endl;
          return 7;
       }
    }
+   else if(args.cipher == "vigenere")
+   {
+      for(auto c : args.key)
+      {
+         if(!std::isalpha(c))
+         {
+            std::cout << "Error: Key must be alphabetic" << std::endl;
+            return 11;
+         }
+      }
+      if(args.key.length() < 1)
+      {
+         std::cout << "Error: Minimum key length is 1 character" << std::endl;
+         return 8;
+      }
+   }   
 
    return 0;
 }

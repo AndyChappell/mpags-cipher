@@ -3,6 +3,7 @@
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
 #include "PlayfairCipher.hpp"
+#include "VigenereCipher.hpp"
 #include "IOProcessing.hpp"
 
 #include <iostream>
@@ -73,6 +74,25 @@ int main(int argc, char* argv[])
    else if(args.cipher == "playfair")
    {
       PlayfairCipher cipher{};
+      cipher.setKey(args.key);
+      if(args.encrypt)
+      {
+         std::string ciphertext = cipher.encode(input);
+         processOutput(
+            args.outputFilename.empty() ? std::cout : outputStream,
+            ciphertext);
+      }
+      else
+      {
+         std::string plaintext = cipher.decode(input);
+         processOutput(
+            args.outputFilename.empty() ? std::cout : outputStream,
+            plaintext);
+      }
+   }
+   else if(args.cipher == "vigenere")
+   {
+      VigenereCipher cipher{};
       cipher.setKey(args.key);
       if(args.encrypt)
       {

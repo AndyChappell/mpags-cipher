@@ -1,26 +1,25 @@
-#ifndef MPAGSCIPHER_CAESARCIPHER_HPP
-#define MPAGSCIPHER_CAESARCIPHER_HPP
+#ifndef MPAGSCIPHER_VIGENERECIPHER_HPP
+#define MPAGSCIPHER_VIGENERECIPHER_HPP
 
 #include "CipherMode.hpp"
-#include "TransformChar.hpp"
 
 #include <string>
 #include <iostream>
 #include <sstream>
 
 /**
-	CaesarCipher provides encoding (decoding) of plaintext (ciphertext)
-	using the Caesar Cipher.
+	VigenereCipher provides encoding (decoding) of plaintext (ciphertext)
+	using the Vigenere Cipher.
  */
-class CaesarCipher
+class VigenereCipher
 {
 	public:
 	/**
-		Create a CaesarCipher with a specified key.
+		Create a VigenereCipher with a specified key.
 
 		\param key The key to use for encoding/decoding
 	 */
-	CaesarCipher(const std::string& key);
+	VigenereCipher();
 	
    /**
       Sets the encryption/decryption key.
@@ -46,7 +45,7 @@ class CaesarCipher
 	std::string decode(const std::string& ciphertext) const;
 	
 	private:
-	int key_;	///< The key to use for encoding/decoding
+	std::string key_;	///< The key to use for encoding/decoding
 };
 
 #endif

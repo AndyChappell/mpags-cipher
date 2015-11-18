@@ -134,14 +134,29 @@ TEST_CASE("Cipher option is processed", "[cipher]"){
    
    str3 = std::string("playfair");
    arg3 = const_cast<char*>(str3.c_str());
-   char* strArgs3[] = {arg1, arg2, arg3};
+   str4 = std::string("-e");
+   arg4 = const_cast<char*>(str4.c_str());
+   str5 = std::string("example");
+   arg5 = const_cast<char*>(str5.c_str());
+   char* strArgs3[] = {arg1, arg2, arg3, arg4, arg5};
 	CommandLineArguments args3{false, false, false, "", "", "", ""};
-	REQUIRE(processCommandLine(3, strArgs3, args3) == 0);
+	REQUIRE(processCommandLine(5, strArgs3, args3) == 0);
    REQUIRE(args3.cipher == "playfair");
    
    str3 = std::string("invalid");
    arg3 = const_cast<char*>(str3.c_str());
    char* strArgs4[] = {arg1, arg2, arg3};
 	CommandLineArguments args4{false, false, false, "", "", "", ""};
-	REQUIRE(processCommandLine(3, strArgs4, args4) == 6);
+	REQUIRE(processCommandLine(3, strArgs4, args4) == 9);
+   
+   str3 = std::string("vigenere");
+   arg3 = const_cast<char*>(str3.c_str());
+   str4 = std::string("-e");
+   arg4 = const_cast<char*>(str4.c_str());
+   str5 = std::string("example");
+   arg5 = const_cast<char*>(str5.c_str());
+   char* strArgs5[] = {arg1, arg2, arg3, arg4, arg5};
+	CommandLineArguments args5{false, false, false, "", "", "", ""};
+	REQUIRE(processCommandLine(5, strArgs5, args5) == 0);
+   REQUIRE(args5.cipher == "vigenere");
 }

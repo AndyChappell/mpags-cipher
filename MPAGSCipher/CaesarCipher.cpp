@@ -4,6 +4,11 @@ CaesarCipher::CaesarCipher(const std::string& key) : key_{std::atoi(key.c_str())
 {
 }
 
+void CaesarCipher::setKey(const std::string& key)
+{
+   this->key_ = std::atoi(key.c_str());
+}
+
 std::string CaesarCipher::encode(const std::string& plaintext) const
 {
    const int NUM_CHAR{26};

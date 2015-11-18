@@ -5,15 +5,15 @@
 #include "CaesarCipher.hpp"
 
 TEST_CASE("Caesar Cipher encoding", "[cipher]"){
-   std::string plaintext{"Hello world!"};
+   std::string plaintext{"HELLOWORLD"};
 
-   CaesarCipher caesar{"5"};
-	REQUIRE(caesar.encode(plaintext) == "MJQQTBTWQI");
+   CaesarCipher cipher{"5"};
+	REQUIRE(cipher.encode(plaintext) == "MJQQTBTWQI");
 }
 
 TEST_CASE("Caesar Cipher decoding", "[cipher]"){
    std::string ciphertext{"MJQQTBTWQI"};
 
-   CaesarCipher caesar{"5"};
-	REQUIRE(caesar.decode(ciphertext) == "HELLOWORLD");
+   CaesarCipher cipher{"5"};
+	REQUIRE(cipher.decode(ciphertext) == "HELLOWORLD");
 }

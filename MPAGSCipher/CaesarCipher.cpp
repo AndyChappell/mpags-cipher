@@ -8,8 +8,7 @@ std::string CaesarCipher::encode(const std::string& plaintext) const
 {
    const int NUM_CHAR{26};
    std::ostringstream cipherStream{""};
-   std::string transString{transformString(plaintext)};
-   for(char c : transString)
+   for(char c : plaintext)
    {
       int cipherVal{((c - 'A') + key_) % NUM_CHAR};
       if(cipherVal < 0)
@@ -27,8 +26,7 @@ std::string CaesarCipher::decode(const std::string& ciphertext) const
 {
    const int NUM_CHAR{26};
    std::ostringstream plainStream{""};
-   std::string transString{transformString(ciphertext)};
-   for(char c : transString)
+   for(char c : ciphertext)
    {
       int plainVal{((c - 'A') - key_) % NUM_CHAR};
       if(plainVal < 0)

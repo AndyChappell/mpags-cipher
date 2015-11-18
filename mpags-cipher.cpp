@@ -43,8 +43,14 @@ int main(int argc, char* argv[])
       }
    }
      
-   std::string input = processInput(
+   std::string text = processInput(
       args.inputFilename.empty() ? std::cin : inputStream);
+
+   std::string input{};
+   for(char c : text)
+   {
+	   input.append(transformChar(c));
+   }
 
    if(args.cipher == "caesar")
    {
@@ -76,11 +82,11 @@ int main(int argc, char* argv[])
             ciphertext);
       }
       else
-      {/*
+      {
          std::string plaintext = cipher.decode(input);
          processOutput(
             args.outputFilename.empty() ? std::cout : outputStream,
-            plaintext);*/
+            plaintext);
       }
    }
   

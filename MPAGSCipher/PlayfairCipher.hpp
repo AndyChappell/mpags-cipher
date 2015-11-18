@@ -37,7 +37,15 @@ class PlayfairCipher
 		\return The encoded ciphertext
 	 */
 	std::string encode(const std::string& plaintext) const;
-	
+
+	/**
+		Decodes specified ciphertext.
+		
+		\param ciphertext The ciphertext to decode
+		\return The decoded plaintext
+	 */	
+   std::string decode(const std::string& ciphertext) const;
+   
 	private:
 	std::string key_; ///< The key to use for encoding/decoding
    std::map<std::pair<int, int>, char> chars_;

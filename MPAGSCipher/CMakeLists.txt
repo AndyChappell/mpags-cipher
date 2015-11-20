@@ -2,6 +2,8 @@
 
 # - Declare the build of the status MPAGSCipher library
 add_library(MPAGSCipher STATIC
+  CipherFactory.hpp
+  CipherFactory.cpp
   Cipher.hpp
   CaesarCipher.hpp
   CaesarCipher.cpp
@@ -22,5 +24,5 @@ target_include_directories(MPAGSCipher
   )
 
 target_compile_features(MPAGSCipher
-  PUBLIC cxx_auto_type cxx_range_for cxx_uniform_initialization
+  PUBLIC cxx_auto_type cxx_range_for cxx_uniform_initialization cxx_binary_literals
   )

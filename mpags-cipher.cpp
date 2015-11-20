@@ -5,6 +5,7 @@
 #include "PlayfairCipher.hpp"
 #include "VigenereCipher.hpp"
 #include "IOProcessing.hpp"
+#include "CipherFactory.hpp"
 
 #include <iostream>
 #include <istream>
@@ -53,62 +54,34 @@ int main(int argc, char* argv[])
 	   input.append(transformChar(c));
    }
 
+   std::unique_ptr<Cipher> cipher;
    if(args.cipher == "caesar")
    {
-      CaesarCipher cipher{};
-      cipher.setKey(args.key);
-      if(args.encrypt)
-      {
-         std::string ciphertext = cipher.encode(input);
-         processOutput(
-            args.outputFilename.empty() ? std::cout : outputStream,
-            ciphertext);
-      }
-      else
-      {
-         std::string plaintext = cipher.decode(input);
-         processOutput(
-            args.outputFilename.empty() ? std::cout : outputStream,
-            plaintext);      
-      }
+      cipher = cipherFactory(CipherTypes::CAESAR);
    }
    else if(args.cipher == "playfair")
    {
-      PlayfairCipher cipher{};
-      cipher.setKey(args.key);
-      if(args.encrypt)
-      {
-         std::string ciphertext = cipher.encode(input);
-         processOutput(
-            args.outputFilename.empty() ? std::cout : outputStream,
-            ciphertext);
-      }
-      else
-      {
-         std::string plaintext = cipher.decode(input);
-         processOutput(
-            args.outputFilename.empty() ? std::cout : outputStream,
-            plaintext);
-      }
+      cipher = cipherFactory(CipherTypes::PLAYFAIR);
    }
    else if(args.cipher == "vigenere")
    {
-      VigenereCipher cipher{};
-      cipher.setKey(args.key);
-      if(args.encrypt)
-      {
-         std::string ciphertext = cipher.encode(input);
-         processOutput(
-            args.outputFilename.empty() ? std::cout : outputStream,
-            ciphertext);
-      }
-      else
-      {
-         std::string plaintext = cipher.decode(input);
-         processOutput(
-            args.outputFilename.empty() ? std::cout : outputStream,
-            plaintext);
-      }
+      cipher = cipherFactory(CipherTypes::VIGENERE);
+   }
+   
+   (*cipher).setKey(args.key);
+   if(args.encrypt)
+   {
+      std::string ciphertext = (*cipher).encode(input);
+      processOutput(
+         args.outputFilename.empty() ? std::cout : outputStream,
+         ciphertext);
+   }
+   else
+   {
+      std::string plaintext = (*cipher).decode(input);
+      processOutput(
+         args.outputFilename.empty() ? std::cout : outputStream,
+         plaintext);      
    }
   
    return 0;

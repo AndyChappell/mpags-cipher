@@ -1,9 +1,5 @@
 #include "CaesarCipher.hpp"
 
-CaesarCipher::CaesarCipher(const std::string& key) : key_{std::atoi(key.c_str())}
-{
-}
-
 void CaesarCipher::setKey(const std::string& key)
 {
    this->key_ = std::atoi(key.c_str());

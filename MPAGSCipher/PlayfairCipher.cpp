@@ -4,10 +4,6 @@
 #include <cctype>
 #include <map>
 
-PlayfairCipher::PlayfairCipher()
-{
-}
-
 void PlayfairCipher::setKey(const std::string& key)
 {
    // store the original key

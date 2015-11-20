@@ -1,6 +1,7 @@
 #ifndef MPAGSCIPHER_CAESARCIPHER_HPP
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 
+#include "Cipher.hpp"
 #include "CipherMode.hpp"
 #include "TransformChar.hpp"
 
@@ -12,22 +13,15 @@
 	CaesarCipher provides encoding (decoding) of plaintext (ciphertext)
 	using the Caesar Cipher.
  */
-class CaesarCipher
+class CaesarCipher : public Cipher
 {
 	public:
-	/**
-		Create a CaesarCipher with a specified key.
-
-		\param key The key to use for encoding/decoding
-	 */
-	CaesarCipher(const std::string& key);
-	
    /**
       Sets the encryption/decryption key.
 
       \param kay The key to use for encryption/decryption
    */
-   void setKey(const std::string& key);
+   virtual void setKey(const std::string& key) override;
    
 	/**
 		Encodes specified plaintext.
@@ -35,7 +29,7 @@ class CaesarCipher
 		\param plaintext The plaintext to encode
 		\return The encoded ciphertext
 	 */
-	std::string encode(const std::string& plaintext) const;
+	virtual std::string encode(const std::string& plaintext) const override;
 
 	/**
 		Decodes specified ciphertext.
@@ -43,7 +37,7 @@ class CaesarCipher
 		\param ciphertext The ciphertext to decode
 		\return The decoded plaintext
 	 */
-	std::string decode(const std::string& ciphertext) const;
+	virtual std::string decode(const std::string& ciphertext) const override;
 	
 	private:
 	int key_;	///< The key to use for encoding/decoding

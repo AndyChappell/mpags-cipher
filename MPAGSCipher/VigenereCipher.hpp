@@ -1,6 +1,7 @@
 #ifndef MPAGSCIPHER_VIGENERECIPHER_HPP
 #define MPAGSCIPHER_VIGENERECIPHER_HPP
 
+#include "Cipher.hpp"
 #include "CipherMode.hpp"
 
 #include <string>
@@ -11,22 +12,15 @@
 	VigenereCipher provides encoding (decoding) of plaintext (ciphertext)
 	using the Vigenere Cipher.
  */
-class VigenereCipher
+class VigenereCipher : public Cipher
 {
-	public:
-	/**
-		Create a VigenereCipher with a specified key.
-
-		\param key The key to use for encoding/decoding
-	 */
-	VigenereCipher();
-	
+   public:  
    /**
       Sets the encryption/decryption key.
 
       \param kay The key to use for encryption/decryption
    */
-   void setKey(const std::string& key);
+   virtual void setKey(const std::string& key) override;
    
 	/**
 		Encodes specified plaintext.
@@ -34,7 +28,7 @@ class VigenereCipher
 		\param plaintext The plaintext to encode
 		\return The encoded ciphertext
 	 */
-	std::string encode(const std::string& plaintext) const;
+	virtual std::string encode(const std::string& plaintext) const override;
 
 	/**
 		Decodes specified ciphertext.
@@ -42,7 +36,7 @@ class VigenereCipher
 		\param ciphertext The ciphertext to decode
 		\return The decoded plaintext
 	 */
-	std::string decode(const std::string& ciphertext) const;
+	virtual std::string decode(const std::string& ciphertext) const override;
 	
 	private:
 	std::string key_;	///< The key to use for encoding/decoding

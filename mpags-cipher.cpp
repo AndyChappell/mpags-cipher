@@ -55,7 +55,8 @@ int main(int argc, char* argv[])
 
    if(args.cipher == "caesar")
    {
-      CaesarCipher cipher{args.key};
+      CaesarCipher cipher{};
+      cipher.setKey(args.key);
       if(args.encrypt)
       {
          std::string ciphertext = cipher.encode(input);

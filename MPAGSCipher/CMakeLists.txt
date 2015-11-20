@@ -2,6 +2,7 @@
 
 # - Declare the build of the status MPAGSCipher library
 add_library(MPAGSCipher STATIC
+  Cipher.hpp
   CaesarCipher.hpp
   CaesarCipher.cpp
   PlayfairCipher.hpp

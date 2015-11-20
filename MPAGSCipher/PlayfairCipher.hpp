@@ -1,6 +1,7 @@
 #ifndef MPAGSCIPHER_PLAYFAIRCIPHER_HPP
 #define MPAGSCIPHER_PLAYFAIRCIPHER_HPP
 
+#include "Cipher.hpp"
 #include "CipherMode.hpp"
 #include "TransformChar.hpp"
 
@@ -15,20 +16,15 @@
 	using the Playfair Cipher.
  */
  
-class PlayfairCipher
+class PlayfairCipher : public Cipher
 {
 	public:
-	/**
-		Create a PlayfairCipher.
-	 */
-	PlayfairCipher();
-
 	/**
 		Sets the encryption/decryption key.
 		
 		\param kay The key to use for encryption/decryption
 	 */
-	void setKey(const std::string& key);
+	virtual void setKey(const std::string& key) override;
 	
 	/**
 		Encodes specified plaintext.
@@ -36,7 +32,7 @@ class PlayfairCipher
 		\param plaintext The plaintext to encode
 		\return The encoded ciphertext
 	 */
-	std::string encode(const std::string& plaintext) const;
+	virtual std::string encode(const std::string& plaintext) const override;
 
 	/**
 		Decodes specified ciphertext.
@@ -44,7 +40,7 @@ class PlayfairCipher
 		\param ciphertext The ciphertext to decode
 		\return The decoded plaintext
 	 */	
-   std::string decode(const std::string& ciphertext) const;
+   virtual std::string decode(const std::string& ciphertext) const override;
    
 	private:
 	std::string key_; ///< The key to use for encoding/decoding

@@ -3,10 +3,6 @@
 
 #include <algorithm>
 
-VigenereCipher::VigenereCipher()
-{
-}
-
 void VigenereCipher::setKey(const std::string& key)
 {
    this->key_ = key;
@@ -36,7 +32,7 @@ std::string VigenereCipher::encode(const std::string& plaintext) const
    }
    
    std::string ciphertext{};
-   CaesarCipher cipher{"0"};
+   CaesarCipher cipher{};
    for(unsigned int i = 0; i < plaintext.size(); ++i)
    {
       cipher.setKey(std::to_string(1 + oneTimeKey[i] - 'A'));
@@ -67,7 +63,7 @@ std::string VigenereCipher::decode(const std::string& ciphertext) const
    }
    
    std::string plaintext{};
-   CaesarCipher cipher{"0"};
+   CaesarCipher cipher{};
    for(unsigned int i = 0; i < ciphertext.size(); ++i)
    {
       cipher.setKey(std::to_string(1 + oneTimeKey[i] - 'A'));

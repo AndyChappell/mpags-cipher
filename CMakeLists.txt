@@ -34,6 +34,9 @@ target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)
 include(GNUInstallDirs)
 install(TARGETS mpags-cipher DESTINATION ${CMAKE_INSTALL_BINDIR})
 
+# - Recurse into Documentation directory
+add_subdirectory(Documentation)
+
 # - Package mpags-cipher binaries and sources
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 include(CPack)

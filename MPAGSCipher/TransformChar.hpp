@@ -1,3 +1,4 @@
+//! \file TransformChar.hpp
 #ifndef MPAGSCIPHER_TRANSFORMCHAR_HPP
 #define MPAGSCIPHER_TRANSFORMCHAR_HPP
 

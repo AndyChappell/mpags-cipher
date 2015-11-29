@@ -1,3 +1,4 @@
+//! \file CaesarCipher.hpp
 #ifndef MPAGSCIPHER_CAESARCIPHER_HPP
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 

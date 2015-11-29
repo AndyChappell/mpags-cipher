@@ -1,3 +1,4 @@
+//! \file CipherFactory.hpp
 #ifndef MPAGSCIPHER_CIPHERFACTORY_HPP
 #define MPAGSCIPHER_CIPHERFACTORY_HPP
 
@@ -8,6 +9,9 @@
 #include "PlayfairCipher.hpp"
 #include "VigenereCipher.hpp"
 
+/**
+	CipherTypes specifies the types of Cipher available.
+ */
 enum class CipherTypes {CAESAR, PLAYFAIR, VIGENERE};
 
 /**

@@ -1,3 +1,4 @@
+//! \file PlayfairCipher.hpp
 #ifndef MPAGSCIPHER_PLAYFAIRCIPHER_HPP
 #define MPAGSCIPHER_PLAYFAIRCIPHER_HPP
 
@@ -22,7 +23,7 @@ class PlayfairCipher : public Cipher
 	/**
 		Sets the encryption/decryption key.
 		
-		\param kay The key to use for encryption/decryption
+		\param key The key to use for encryption/decryption
 	 */
 	virtual void setKey(const std::string& key) override;
 	

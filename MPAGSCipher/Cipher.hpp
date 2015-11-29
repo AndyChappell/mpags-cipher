@@ -1,3 +1,4 @@
+//! \file Cipher.hpp
 #ifndef MPAGSCIPHER_CIPHER_HPP
 #define MPAGSCIPHER_CIPHER_HPP
 

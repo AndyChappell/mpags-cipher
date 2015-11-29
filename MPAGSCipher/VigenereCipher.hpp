@@ -1,3 +1,4 @@
+//! \file VigenereCipher.hpp
 #ifndef MPAGSCIPHER_VIGENERECIPHER_HPP
 #define MPAGSCIPHER_VIGENERECIPHER_HPP
 
